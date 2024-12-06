@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/marwiesing/GitOps_Argo_CD_1
+    repoURL: https://github.com/marwiesing/GitOps_Argo_CD.git
     targetRevision: main
     path: manifests
   destination:
