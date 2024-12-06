@@ -1,4 +1,6 @@
-# GitOps_Argo_CD_1
+# GitOps_Argo_CD
+
+> This directory is for my exercies with Argo CD and Helm
 
 ```bash
 mwiesing@workstation:~/udemy/agroCD$ cp -r section03_Workflow/helm/ section04_Agro_CD/exercise01/
