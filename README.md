@@ -21,6 +21,7 @@ Use this token when configuring Argo CD to authenticate with GitHub.
 
 #### Git always fun:
 
+```bash
 mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ git checkout -b feature/increase-replicas
 Switched to a new branch 'feature/increase-replicas'
 mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ vim manifests/nginx-deployment.yaml
@@ -101,3 +102,4 @@ mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ git merge feat
 Merge made by the 'ort' strategy.
  manifests/nginx-deployment.yaml | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ ```
