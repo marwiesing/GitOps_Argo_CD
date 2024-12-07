@@ -7,8 +7,9 @@ spec:
   project: default
   source:
     chart: httpbin
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 2.1.21
+    repoURL: 'https://github.com/marwiesing/GitOps_Argo_CD.git'
+    path: argo-cd
+    targetRevision: feature/add-httpbin-chart # alternativ main
     helm:
       releaseName: httpbin
   destination:
