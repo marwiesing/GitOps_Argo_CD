@@ -9,7 +9,7 @@ spec:
     chart: httpbin
     repoURL: 'https://github.com/marwiesing/GitOps_Argo_CD.git'
     path: argo-cd
-    targetRevision: feature/add-httpbin-chart # alternativ main
+    targetRevision: main
     helm:
       releaseName: httpbin
   destination:
