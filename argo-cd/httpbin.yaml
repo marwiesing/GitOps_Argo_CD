@@ -6,16 +6,14 @@ metadata:
 spec:
   project: default
   source:
-    chart: httpbin
-    repoURL: 'https://gitlab.com/marwiesing/samplegitopsapp.git'
-    path: argo-cd
-    targetRevision: main
-    helm:
-      releaseName: httpbin
+    repoURL: 'https://matheusfm.dev/charts'  # Correct Helm repository URL
+    chart: httpbin                         # The chart name
+    targetRevision: latest                 # You can specify a version or use 'latest'
   destination:
     server: 'https://kubernetes.default.svc'
-    namespace: default  # Target deployment namespace (can be changed if needed)
+    namespace: default                      # Target deployment namespace (can be changed if needed)
   syncPolicy:
     automated:
       selfHeal: true
       prune: true
+      
