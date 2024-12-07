@@ -8,7 +8,7 @@ spec:
   source:
     chart: httpbin
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 0.10.1
+    targetRevision: 2.1.21
     helm:
       releaseName: httpbin
   destination:
