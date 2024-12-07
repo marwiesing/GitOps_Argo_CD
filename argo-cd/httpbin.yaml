@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     chart: httpbin
-    repoURL: 'https://github.com/marwiesing/GitOps_Argo_CD.git'
+    repoURL: https://charts.example.com
     targetRevision: 0.10.1
     helm:
       releaseName: httpbin
