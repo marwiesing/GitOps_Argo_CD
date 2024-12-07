@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: httpbin
-  namespace: argo-cd  # Use your argo-cd namespace
+  name: argocd
+  namespace: argo-cd
 spec:
-  project: default
-  source:
-    repoURL: 'https://matheusfm.dev/charts'  # Correct Helm repository URL
-    chart: httpbin  # The chart name
-    targetRevision: 0.1.1  # Specify the chart version (check for the latest stable version)
   destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: default  # Target deployment namespace (can be changed if needed)
+    server: https://kubernetes.default.svc
+    namespace: argo-cd
+  source:
+    repoURL: 'https://github.com/marwiesing/GitOps_Argo_CD.git'
+    path: argo-cd
+    targetRevision: main
+  project: default
   syncPolicy:
-    automated:
+    automated: 
       selfHeal: true
       prune: true
