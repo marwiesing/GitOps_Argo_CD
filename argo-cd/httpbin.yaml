@@ -2,19 +2,19 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: httpbin
-  namespace: argo-cd
+  namespace: argo-cd  # Use your argo-cd namespace
 spec:
   project: default
   source:
     chart: httpbin
-    repoURL: https://charts.example.com
-    targetRevision: 0.10.1
+    repoURL: https://github.com/marwiesing/GitOps_Argo_CD.git  # Replace with your GitHub repository URL
+    targetRevision: feature/add-httpbin-chart  # Reference your current branch
     helm:
       releaseName: httpbin
   destination:
-    server: https://kubernetes.default.svc
-    namespace: default
+    server: 'https://kubernetes.default.svc'
+    namespace: default  # Target deployment namespace (can be changed if needed)
   syncPolicy:
     automated:
-      prune: true
       selfHeal: true
+      prune: true
