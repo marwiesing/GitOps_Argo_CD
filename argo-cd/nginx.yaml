@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/marwiesing/GitOps_Argo_CD.git
     targetRevision: main
-    path: mychart
+    path: helm/mychart
     helm:
       releaseName: nginx
       values: |
