@@ -8,7 +8,11 @@ spec:
   source:
     repoURL: https://github.com/marwiesing/GitOps_Argo_CD.git
     targetRevision: main
-    path: manifests
+    path: mychart
+    helm:
+      releaseName: nginx
+      values: |
+        replicaCount: 2
   destination:
     server: https://kubernetes.default.svc 
     namespace: default
