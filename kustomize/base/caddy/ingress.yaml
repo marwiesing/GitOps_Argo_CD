@@ -7,10 +7,10 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: localhost
+  - host: http://localhost/
     http: 
       paths:
-      - path: /caddy
+      - path: /
         pathType: Prefix
         backend:
           service:
