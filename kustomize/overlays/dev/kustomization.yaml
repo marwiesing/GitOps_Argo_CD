@@ -8,4 +8,11 @@ resources:
 namespace: default
 
 patches:
-  - patch.yaml
+  - path: patch.yaml
+    target:
+      kind: Ingress
+      name: caddy-ingress
+  - path: patch.yaml
+    target:
+      kind: Deployment
+      name: nginx-deployment
