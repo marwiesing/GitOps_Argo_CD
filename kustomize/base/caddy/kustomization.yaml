@@ -12,4 +12,3 @@ configMapGenerator:
       - Caddyfile
 
 namespace: default
-
