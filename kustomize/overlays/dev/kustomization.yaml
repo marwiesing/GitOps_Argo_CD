@@ -9,8 +9,3 @@ namespace: default
 
 patches:
   - patch.yaml
-
-configMapGenerator:
-  - name: caddy-config
-    files:
-      - Caddyfile
