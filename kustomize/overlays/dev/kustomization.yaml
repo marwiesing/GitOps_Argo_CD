@@ -8,4 +8,4 @@ resources:
 namespace: default
 
 patches:
-  - patch.yaml
+  - path: patch.yaml
