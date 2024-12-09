@@ -91,7 +91,7 @@ kustomize/
     - ../../base/nginx
     - ../../base/caddy
 
-  patchesStrategicMerge:
+  patches:
     - patch.yaml
   ```
 
@@ -177,7 +177,7 @@ resources:
   - ../../base/nginx
   - ../../base/caddy
 
-patchesStrategicMerge:
+patches:
   - patch.yaml
 ```
 

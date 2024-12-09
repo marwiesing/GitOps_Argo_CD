@@ -7,5 +7,5 @@ resources:
 
 namespace: default
 
-patchesStrategicMerge:
+patches:
   - patch.yaml
