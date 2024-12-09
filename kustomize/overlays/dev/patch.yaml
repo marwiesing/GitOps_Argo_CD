@@ -12,16 +12,15 @@
     spec:
       ingressClassName: nginx
       rules:
-        - host: example.com
-          http:
-            paths:
-              - path: /caddy
-                pathType: Prefix
-                backend:
-                  service:
-                    name: caddy-service
-                    port:
-                      name: http
+      - http:
+          paths:
+          - path: /caddy
+          pathType: Prefix
+          backend:
+              service:
+              name: caddy-service
+              port:
+                  name: http
 
 # Patch for Nginx Deployment
 - target:
