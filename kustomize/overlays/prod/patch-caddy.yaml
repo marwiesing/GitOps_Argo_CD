@@ -6,15 +6,18 @@
     kind: Ingress
     metadata:
       name: caddy-ingress
+      annotations:
+        nginx.ingress.kubernetes.io/rewrite-target: /
     spec:
+      ingressClassName: nginx
       rules:
-        - host: prod.example.com
-          http:
-            paths:
-              - path: /caddy
-                pathType: Prefix
-                backend:
-                  service:
-                    name: caddy-service
-                    port:
-                      number: 80
+      - http:
+          paths:
+          - path: /caddy
+          pathType: Prefix
+          backend:
+              service:
+              name: caddy-service
+              port:
+                  name: http
+
