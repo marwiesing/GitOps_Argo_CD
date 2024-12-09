@@ -1,0 +1,12 @@
+- target:
+    kind: Deployment
+    name: nginx-deployment
+  patch: |-
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app: nginx-deployment
+      name: nginx-deployment
+    spec:
+      replicas: 10  # Use different replicas for prod
