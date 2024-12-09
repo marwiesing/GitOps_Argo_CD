@@ -9,8 +9,8 @@ spec:
     namespace: argo-cd
   source:
     repoURL: 'https://github.com/marwiesing/GitOps_Argo_CD.git'
-    path: kustomize/overlays/dev # Change this line to deploy to dev
-#   path: kustomize/overlays/prod # Change this line to deploy to prod
+    # path: kustomize/overlays/dev # Change this line to deploy to dev
+    path: kustomize/overlays/prod # Change this line to deploy to prod
     targetRevision: main
   project: default
   syncPolicy:
