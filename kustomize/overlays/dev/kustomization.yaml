@@ -11,6 +11,6 @@ patches:
   - patch.yaml
 
 configMapGenerator:
-- name: caddy-config
+  - name: caddy-config
     files:
-    - Caddyfile  
+      - Caddyfile
