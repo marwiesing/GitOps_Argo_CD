@@ -7,12 +7,49 @@ resources:
 
 namespace: default
 
+# patches:
+#   - path: patch.yaml
+#     target:
+#       kind: Ingress
+#       name: caddy-ingress
+#   - path: patch.yaml
+#     target:
+#       kind: Deployment
+#       name: nginx-deployment
+
+
 patches:
-  - path: patch.yaml
-    target:
+  - target:
       kind: Ingress
       name: caddy-ingress
-  - path: patch.yaml
-    target:
+    patch: |-
+      apiVersion: networking.k8s.io/v1
+      kind: Ingress
+      metadata:
+        name: caddy-ingress
+        annotations:
+          nginx.ingress.kubernetes.io/rewrite-target: /
+      spec:
+        ingressClassName: nginx
+        rules:
+        - http:
+            paths:
+            - path: /caddy
+              pathType: Prefix
+              backend:
+                service:
+                  name: caddy-service
+                  port:
+                    name: http
+  - target:
       kind: Deployment
       name: nginx-deployment
+    patch: |-
+      apiVersion: apps/v1
+      kind: Deployment
+      metadata:
+        labels:
+          app: nginx-deployment
+        name: nginx-deployment
+      spec:
+        replicas: 4
