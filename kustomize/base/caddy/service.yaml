@@ -3,12 +3,12 @@ kind: Service
 metadata:
   name: caddy-service
   labels:
-    app: caddy  # Fixed label consistency
+    app: caddy  
 spec:
   selector:
-    app: caddy  # Fixed label consistency
+    app: caddy  
   ports:
   - name: http
     port: 80
-    targetPort: 80  # Add targetPort if it's the same as the port
+
 

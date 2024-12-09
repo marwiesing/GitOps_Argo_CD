@@ -2,24 +2,24 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: caddy-deployment
-  labels:  # Fixed typo from 'labes' to 'labels'
+  labels:  
     app: caddy
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: caddy  # Corrected indentation here
+      app: caddy  
   template:
     metadata:
       labels:
-        app: caddy  # Corrected indentation here
+        app: caddy 
     spec:
       containers:
       - name: caddy
         image: caddy:alpine
         ports:
         - containerPort: 80
-          name: http  # Fixed indentation
+          name: http  
         volumeMounts:
         - name: caddy-config
           mountPath: /etc/caddy/
@@ -27,4 +27,4 @@ spec:
       volumes:
       - name: caddy-config
         configMap:
-          name: caddy-config  # Fixed indentation
+          name: caddy-config 
