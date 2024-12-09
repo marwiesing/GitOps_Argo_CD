@@ -1,12 +1,14 @@
 apiVersion: v1
 kind: Service
 metadata:
-    name: caddy-service
-    labels:
-      app: cadd
+  name: caddy-service
+  labels:
+    app: caddy  # Fixed label consistency
 spec:
-    selector:
-    app: caddy
-    ports:
-    - name: http
+  selector:
+    app: caddy  # Fixed label consistency
+  ports:
+  - name: http
     port: 80
+    targetPort: 80  # Add targetPort if it's the same as the port
+
