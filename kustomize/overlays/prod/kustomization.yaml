@@ -8,5 +8,5 @@ resources:
 namespace: default
 
 patches:
-  - path: patch-nginx.yaml
-  - path: patch-caddy.yaml
+  - patch-nginx.yaml
+  - patch-caddy.yaml
