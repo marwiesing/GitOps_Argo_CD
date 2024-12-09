@@ -31,7 +31,8 @@ patches:
       spec:
         ingressClassName: nginx
         rules:
-        - http:
+        - host: localhost
+          http:
             paths:
             - path: /caddy
               pathType: Prefix
