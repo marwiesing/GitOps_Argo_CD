@@ -1,14 +1,74 @@
 # GitOps_Argo_CD
 
-> This directory is for my exercies with Argo CD and Helm
+Yes, your approach is mostly correct, but there are additional steps required to properly update the Git configuration after moving the submodule. Moving the submodule and updating the `.gitmodules` file directly is part of the process, but Git needs to be informed about the changes.
 
-```bash
-mwiesing@workstation:~/udemy/agroCD$ cp -r section03_Workflow/helm/ section04_Agro_CD/exercise01/
-mwiesing@workstation:~/udemy/agroCD$ cp -r section03_Workflow/manifests/ section04_Agro_CD/exercise01/
-mwiesing@workstation:~/udemy/agroCD$ cp -r section03_Workflow/kustomize/ section04_Agro_CD/exercise01/
-```
+Here’s the step-by-step guide:
 
-To generate a GitHub Personal Access Token for Argo CD:
+---
+
+### **Steps to Move a Submodule**
+
+1. **Move the Submodule Directory**
+   ```bash
+   mv section04_Argo_CD/exercise/ exercise
+   ```
+
+2. **Update the `.gitmodules` File**
+   Open `.gitmodules` in a text editor and update the `path` field for the submodule:
+   ```bash
+   vi .gitmodules
+   ```
+   Change the path:
+   ```text
+   [submodule "exercise"]
+       path = exercise
+       url = git@github.com:marwiesing/GitOps_Argo_CD.git
+   ```
+
+3. **Update Git Configuration**
+   Update Git's internal configuration to reflect the new path:
+   ```bash
+   git submodule sync
+   git submodule update --init --recursive
+   ```
+
+4. **Remove Old Submodule Reference**
+   Remove the old submodule reference from `.git/config`:
+   ```bash
+   git config --remove-section submodule.section04_Argo_CD/exercise
+   ```
+
+5. **Stage and Commit Changes**
+   Stage the updated `.gitmodules` file and the submodule move:
+   ```bash
+   git add .gitmodules
+   git add exercise
+   git commit -m "Moved submodule exercise to the parent directory"
+   ```
+
+6. **Verify the Changes**
+   Confirm that the submodule now points to the new location:
+   ```bash
+   git submodule status
+   ```
+
+---
+
+### **Why These Steps Are Necessary?**
+1. Moving the submodule folder (`mv`) only changes the directory structure.  
+2. Updating `.gitmodules` informs Git about the new location of the submodule.  
+3. Running `git submodule sync` ensures that Git uses the updated path.  
+4. Removing the old section from `.git/config` prevents conflicts or misalignment.  
+
+---
+
+### **Final State**
+After following these steps, your submodule will be moved successfully to the new location, and Git will recognize the updated path.
+
+---
+---
+
+#### To generate a GitHub Personal Access Token for Argo CD:
 
 Go to your GitHub account settings.
 Navigate to Developer settings.
@@ -24,15 +84,19 @@ Use this token when configuring Argo CD to authenticate with GitHub.
 #### Git always fun:
 
 ```bash
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ git checkout -b feature/increase-replicas
+$ git checkout -b feature/increase-replicas
 Switched to a new branch 'feature/increase-replicas'
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ vim manifests/nginx-deployment.yaml
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ git add manifests/nginx-deployment.yaml
+
+$ vim manifests/nginx-deployment.yaml
+
+$ git add manifests/nginx-deployment.yaml
 warning: in the working copy of 'manifests/nginx-deployment.yaml', LF will be replaced by CRLF the next time Git touches it
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ git commit -m "Increases the replica count"
+
+$ git commit -m "Increases the replica count"
 [feature/increase-replicas 3fe6999] Increases the replica count
  1 file changed, 1 insertion(+), 1 deletion(-)
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ git push origin feature/increase-replicas
+
+$ git push origin feature/increase-replicas
 Enter passphrase for key '/home/mwiesing/.ssh/id_ed25519':
 Enumerating objects: 7, done.
 Counting objects: 100% (7/7), done.
@@ -49,7 +113,8 @@ remote:      https://github.com/marwiesing/GitOps_Argo_CD_1/pull/new/feature/inc
 remote:
 To github.com:marwiesing/GitOps_Agro_CD_1.git
  * [new branch]      feature/increase-replicas -> feature/increase-replicas
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ argocd app sync nginx
+
+$ argocd app sync nginx
 WARN[0000] Failed to invoke grpc call. Use flag --grpc-web in grpc calls. To avoid this warning message, use flag --grpc-web.
 TIMESTAMP                  GROUP        KIND   NAMESPACE                  NAME    STATUS   HEALTH        HOOK  MESSAGE
 2024-12-06T11:02:15+01:00            Service     default         nginx-service    Synced  Healthy
@@ -82,7 +147,8 @@ Message:            successfully synced (all tasks run)
 GROUP  KIND        NAMESPACE  NAME              STATUS  HEALTH   HOOK  MESSAGE
        Service     default    nginx-service     Synced  Healthy        service/nginx-service unchanged
 apps   Deployment  default    nginx-deployment  Synced  Healthy        deployment.apps/nginx-deployment unchanged
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ k get pods
+
+$ k get pods
 NAME                                READY   STATUS    RESTARTS   AGE
 nginx-deployment-5f89844fc9-7c54p   1/1     Running   0          20m
 nginx-deployment-5f89844fc9-98685   1/1     Running   0          2m14s
@@ -90,18 +156,22 @@ nginx-deployment-5f89844fc9-nmjwv   1/1     Running   0          20m
 nginx-deployment-5f89844fc9-px6fb   1/1     Running   0          2m14s
 nginx-deployment-5f89844fc9-rtmx7   1/1     Running   0          2m14s
 nginx-deployment-5f89844fc9-zhrjz   1/1     Running   0          20m
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ k get rs
+
+$ k get rs
 NAME                          DESIRED   CURRENT   READY   AGE
 nginx-deployment-5f89844fc9   6         6         6       20m
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ git branch
+
+$ git branch
 * feature/increase-replicas
   main
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ git checkout  main
+
+$ git checkout  main
 M       README.md
 Switched to branch 'main'
 Your branch is up to date with 'origin/main'.
-mwiesing@workstation:~/udemy/agroCD/section04_Agro_CD/exercise01$ git merge feature/increase-replicas
+
+$ git merge feature/increase-replicas
 Merge made by the 'ort' strategy.
  manifests/nginx-deployment.yaml | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
- ```
+```
