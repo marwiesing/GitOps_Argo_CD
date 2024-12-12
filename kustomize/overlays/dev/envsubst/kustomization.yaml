@@ -1,6 +1,6 @@
 resources:
-  - ../../base/envsubst
-  
+  - ../../../base/envsubst
+
 patches:
   - target:
       group: apps
