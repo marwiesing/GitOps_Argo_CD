@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: envsubst
+  namespace: argo-cd
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: argo-cd
+  source:
+    repoURL: 'https://github.com/marwiesing/GitOps_Argo_CD.git'
+    path: kustomize/overlays/dev # Change to prod for production
+    targetRevision: main
+  project: default
+  syncPolicy:
+    automated: 
+      selfHeal: true
+      prune: true
