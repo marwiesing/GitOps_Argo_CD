@@ -1,6 +1,6 @@
 repoServer:
   extraContainers:
-  - name: envsubst
+  - name: envsubst-plugin
     command:
     - "/var/run/argocd/argocd-cmp-server"
     image: 19216812579/envsubst:1.0
