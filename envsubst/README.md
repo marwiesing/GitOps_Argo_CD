@@ -182,3 +182,31 @@ Both **Step 5** and **Step 6** are required. The plugin files from Step 5 must r
 ---
 
 This plan ensures all required files are in place, and your project remains cleanly organized and fully operational.
+
+
+
+### **4. Reapply Changes**
+1. Validate the Helm chart:
+   ```bash
+   helm upgrade argo-cd argo/argo-cd -n argo-cd -f envsubst/values.yaml --dry-run
+   ```
+
+2. If the dry-run succeeds, apply the upgrade:
+   ```bash
+   helm upgrade argo-cd argo/argo-cd -n argo-cd -f envsubst/values.yaml
+   ```
+
+---
+
+### **2. Immediate Recovery Steps**
+
+#### Roll Back to a Previous Working State
+To restore the system, rollback to the last working Helm release:
+```bash
+helm rollback argo-cd 0 -n argo-cd
+```
+### **Final Recovery**
+Rollback the release to stabilize your environment if necessary:
+```bash
+helm rollback argo-cd 0 -n argo-cd
+```
