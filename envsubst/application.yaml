@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/abohmeed/argocd-plugins-app.git'
+    repoURL: 'https://github.com/marwiesing/GitOps_Argo_CD.git'
     targetRevision: HEAD
     path: 'kustomize/overlays/development'
     plugin:
