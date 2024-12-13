@@ -1,18 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: envsubst
+  name: httpd-example
   namespace: argo-cd
 spec:
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: argo-cd
+  project: default
   source:
     repoURL: 'https://github.com/marwiesing/GitOps_Argo_CD.git'
-    path: kustomize/overlays/dev/envsubst # Change to prod for production
     targetRevision: main
-  project: default
+    path: kustomize/overlays/dev/envsubst # Change to prod for production
+    plugin:
+      name: envsubst-plugin-v1.0
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: argo-cd
   syncPolicy:
-    automated: 
+    automated:
       selfHeal: true
       prune: true
