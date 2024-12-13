@@ -35,6 +35,7 @@ kustomize/
   
   ```
   base/
+  ├── kustomization.yaml
   ├── nginx/
   │   ├── kustomization.yaml
   │   ├── nginx-deployment.yaml
@@ -47,6 +48,14 @@ kustomize/
       └── service.yaml
   ```
 
+- **Example `base/kustomization.yaml`:**
+  
+  ```yaml
+  resources:
+    - nginx
+    - caddy
+  ```
+  
 - **Example `base/nginx/kustomization.yaml`:**
   
   ```yaml
