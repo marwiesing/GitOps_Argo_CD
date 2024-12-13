@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: envsubst-plugin-config
+  namespace: argo-cd
+data:
+  plugin.yaml: |
+    apiVersion: argoproj.io/v1alpha1
+    kind: ConfigManagementPlugin
+    metadata:
+      name: envsubst-plugin
+    spec:
+      version: v1.0
+      init:
+        command: [sh]
+        args: [-c, 'echo "Initializing..."']
+      generate:
+        command: [sh, -c]
+        args:
+          - |
+            export $(cat ../kustomize/overlays/dev/envsubst/env-vars.env | xargs) &&
+            kustomize build ../kustomize/overlays/dev/envsubst | envsubst

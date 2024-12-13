@@ -2,18 +2,24 @@ repoServer:
   extraContainers:
   - name: envsubst-plugin
     command:
-    - "/var/run/argocd/argocd-cmp-server"
+      - "/var/run/argocd/argocd-cmp-server"
     image: 19216812579/envsubst:1.0
     securityContext:
       runAsNonRoot: true
       runAsUser: 999
     volumeMounts:
-    - mountPath: /var/run/argocd
-      name: var-files
-    - mountPath: /home/argocd/cmp-server/plugins
-      name: plugins
-    - mountPath: /tmp
-      name: cmp-tmp
+      - mountPath: /var/run/argocd
+        name: var-files
+      - mountPath: /home/argocd/cmp-server/plugins
+        name: plugins
+      - mountPath: /tmp
+        name: cmp-tmp
   volumes:
-  - name: cmp-tmp
-    emptyDir: {}
+    - name: var-files
+      emptyDir: {}  # Added this volume definition
+    - name: plugins
+      configMap:
+        name: envsubst-plugin-config  # Ensure this matches the ConfigMap name
+    - name: cmp-tmp
+      emptyDir: {}
+
