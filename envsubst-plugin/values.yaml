@@ -14,12 +14,17 @@ repoServer:
         name: plugins
       - mountPath: /tmp
         name: cmp-tmp
+  extraVolumes:
+    - name: plugins
+      emptyDir: {}
+  extraVolumeMounts:
+    - name: plugins
+      mountPath: /home/argocd/cmp-server/plugins
   volumes:
     - name: var-files
       emptyDir: {}  # Added this volume definition
     - name: plugins
-      configMap:
-        name: envsubst-plugin-config  # Ensure this matches the ConfigMap name
+      emptyDir: {}      
     - name: cmp-tmp
       emptyDir: {}
 
