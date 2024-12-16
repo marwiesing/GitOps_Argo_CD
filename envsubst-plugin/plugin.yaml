@@ -11,5 +11,4 @@ spec:
     command: [sh, -c]
     args:
       - |
-        export $(cat kustomize/overlays/dev/envsubst/env-vars.env | xargs) &&
-        kustomize build kustomize/overlays/dev/envsubst | envsubst
+        export $(cat env-vars.env | xargs) && kustomize build | envsubst

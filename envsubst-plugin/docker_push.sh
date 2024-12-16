@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Set script's directory as the working directory
+cd "$(dirname "$0")"
+
 # Log in to Docker Hub
 echo "$DOCKER_TOKEN" | docker login -u "$DOCKER_USERNAME" --password-stdin
 

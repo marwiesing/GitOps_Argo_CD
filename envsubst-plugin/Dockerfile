@@ -20,5 +20,5 @@ WORKDIR /home/argocd/cmp-server/config/
 # Copy the plugin configuration file to the correct directory
 COPY plugin.yaml ./
 
-# Add an entrypoint to make sure the container starts correctly
-ENTRYPOINT ["argocd-cmp-server"]
+# Set a default entrypoint for the container
+CMD ["sh"]
